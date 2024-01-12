@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../page-object/LoginPage';
 import { SingupPage } from '../../page-object/SingupPage';
 import { CasinoPage } from '../../page-object/CasinoPage';
+import { BankingPage } from '../../page-object/BankingPage';
 
 test("login form", async ({ page }) => {
   const loginPage = new LoginPage(page);
@@ -33,4 +34,31 @@ test("check casino", async ({ page }) => {
   await casinoPage.getCasinoBtn.click();
   await casinoPage.getGamesSearch.click();
   await casinoPage.getGamesSearch.pressSequentially("dreamcatcher");
+});
+
+test("check banking ", async ({ page }) => {
+  const loginPage = new LoginPage(page); 
+  const bankingPage = new BankingPage(page); 
+
+  await loginPage.goto();
+  await loginPage.getlogInBtn.click();
+  await loginPage.getUserName.pressSequentially("taran.dima464@gmail.com");
+  await loginPage.getPassword.pressSequentially("pass123");
+  await loginPage.getClickLogInBtn.click();
+  await loginPage.getuserDropdownMenu.click();
+  await loginPage.getBanking.click();
+  await bankingPage.getDepositOptions.check();
+});
+
+
+test("check cashier ", async ({ page }) => {
+  const loginPage = new LoginPage(page); 
+
+  await loginPage.goto();
+  await loginPage.getlogInBtn.click();
+  await loginPage.getUserName.pressSequentially("taran.dima464@gmail.com");
+  await loginPage.getPassword.pressSequentially("pass123");
+  await loginPage.getClickLogInBtn.click();
+  await loginPage.getuserDropdownMenu.click();
+  await loginPage.getCashier.click();
 });

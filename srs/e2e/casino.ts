@@ -12,8 +12,8 @@ export class CasinoPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.getCasinoBtn = page.locator("xpath=//a[@qa-automation='casino']");
-    this.getGamesSearch = page.locator("xpath=//div[@class='games-search']");
+    this.getCasinoBtn = page.locator("xpath=//a[@qa-automation='bets/sports']");
+    this.getGamesSearch = page.locator("xpath=//div[@class='OddButton--odd-price-container']");
   }
 
   async goto() {
