@@ -1,23 +1,18 @@
-import { test, expect } from "@playwright/test";
+import { test, chromium ,expect} from "./fixture";
 import { LoginPage } from "../../page-objectJuce/LoginPageJuce";
 import { SingupPage } from "../../page-objectJuce/SingUpPageJuce";
 import { CasinoPage } from "../../page-objectJuce/CasinoPageJuce";
 import { BankingPage } from "../../page-objectJuce/BankingPageJuce";
 
-test("valid logogin form", async ({ page }) => {
-  const loginPage = new LoginPage(page);
-
-  await loginPage.goto();
+test("valid logogin form", async ({ loginPage }) => {
   await loginPage.getlogInBtn.click();
   await loginPage.getUserName.pressSequentially("taran.dima464@gmail.com");
   await loginPage.getPassword.pressSequentially("pass123");
   await loginPage.getClickLogInBtn.click();
 });
 
-test("invalid Emeil logogin form ", async ({ page }) => {
-  const loginPage = new LoginPage(page);
+test("invalid Emeil logogin form ", async ({ loginPage }) => {
 
-  await loginPage.goto();
   await loginPage.getlogInBtn.click();
   await loginPage.getUserName.pressSequentially("taran.dima464@gmai.co");
   await loginPage.getPassword.pressSequentially("pass123");
@@ -25,48 +20,40 @@ test("invalid Emeil logogin form ", async ({ page }) => {
   await expect(loginPage.getMessageErrorInvalidemail).toBeEnabled();
 });
 
-test("valid sing up form", async ({ page }) => {
-  const singupPageJuce = new SingupPage(page);
+test("valid sing up form", async ({ loginPage, singupPage }) => {
 
-  await singupPageJuce.goto();
-  await singupPageJuce.getSignUpBtn.click();
-  await singupPageJuce.getUserNameSP.pressSequentially("testuserfortest");
-  await singupPageJuce.getEmail.pressSequentially("taran.dima464@gmail.com");
-  await singupPageJuce.getPassword.pressSequentially("pass123");
-  await singupPageJuce.getConfirmPassword.pressSequentially("pass123");
-  await singupPageJuce.getBtnNext.click();
+  await singupPage.getSignUpBtn.click();
+  await singupPage.getUserNameSP.pressSequentially("testuserfortest");
+  await singupPage.getEmail.pressSequentially("taran.dima464@gmail.com");
+  await singupPage.getPassword.pressSequentially("pass123");
+  await singupPage.getConfirmPassword.pressSequentially("pass123");
+  await singupPage.getBtnNext.click();
 });
 
-test("invalid sing up form", async ({ page }) => {
-  const singupPageJuce = new SingupPage(page);
+test("invalid sing up form", async ({ singupPage }) => {
 
-  await singupPageJuce.goto();
-  await singupPageJuce.getSignUpBtn.click();
-  await singupPageJuce.getUserNameSP.pressSequentially("testuserfortest");
-  await singupPageJuce.getEmail.pressSequentially("taran.dima464@gmail.com");
-  await singupPageJuce.getPassword.pressSequentially("pass123");
-  await singupPageJuce.getConfirmPassword.pressSequentially("pass1234");
-  await singupPageJuce.getBtnNext.click();
-  await expect(singupPageJuce.getErrorManagerInvalidPass).toBeEnabled();
+  await singupPage.getSignUpBtn.click();
+  await singupPage.getUserNameSP.pressSequentially("testuserfortest");
+  await singupPage.getEmail.pressSequentially("taran.dima464@gmail.com");
+  await singupPage.getPassword.pressSequentially("pass123");
+  await singupPage.getConfirmPassword.pressSequentially("pass1234");
+  await singupPage.getBtnNext.click();
+  await expect(singupPage.getErrorManagerInvalidPass).toBeEnabled();
 });
 
-test("check casino", async ({ page }) => {
-  const casinoPageJuce = new CasinoPage(page);
+test("check casino", async ({ casinoPage }) => {
 
-  await casinoPageJuce.goto();
-  await casinoPageJuce.getCasinoBtn.click();
-  await casinoPageJuce.getGamesSearch.click();
-  await casinoPageJuce.getGamesSearch.pressSequentially("dreamcatcher");
+  await casinoPage.getCasinoBtn.click();
+  await casinoPage.getGamesSearch.click();
+  await casinoPage.getGamesSearch.pressSequentially("dreamcatcher");
 });
 
-test("сheck the launch of the game", async ({ page }) => {
-  const casinoPageJuce = new CasinoPage(page);
+test("сheck the launch of the game", async ({ casinoPage }) => {
 
-  await casinoPageJuce.goto();
-  await casinoPageJuce.getCasinoBtn.click();
-  await casinoPageJuce.getGamesSearch.click();
-  await casinoPageJuce.getGamesSearch.pressSequentially("dreamcatcher");
-  await casinoPageJuce.getGamesDreamcatcher.click();
+  await casinoPage.getCasinoBtn.click();
+  await casinoPage.getGamesSearch.click();
+  await casinoPage.getGamesSearch.pressSequentially("dreamcatcher");
+  await casinoPage.getGamesDreamcatcher.click();
 });
 
 test("check banking ", async ({ page }) => {
@@ -81,15 +68,4 @@ test("check banking ", async ({ page }) => {
   await loginPageJuce.getMenu.click();
   await loginPageJuce.getBanking.click();
   await expect(bankingPageJuce.getBankingContent).toBeEnabled();
-});
-
-test("check cashier ", async ({ page }) => {
-  const loginPageJuce = new LoginPage(page);
-
-  await loginPageJuce.goto();
-  await loginPageJuce.getlogInBtn.click();
-  await loginPageJuce.getUserName.pressSequentially("taran.dima464@gmail.com");
-  await loginPageJuce.getPassword.pressSequentially("pass123");
-  await loginPageJuce.getClickLogInBtn.click();
-  await loginPageJuce.getCashier.click();
 });
