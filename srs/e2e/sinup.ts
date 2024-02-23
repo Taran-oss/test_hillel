@@ -9,7 +9,6 @@ export class SingupPage {
   readonly getPassword: Locator;
   readonly getConfirmPassword: Locator;
   readonly getBtnNext: Locator;
-  readonly getuserDropdownMenu: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -19,7 +18,6 @@ export class SingupPage {
     this.getPassword = page.locator("xpath=//input[@qa-automation='Password']")
     this.getConfirmPassword = page.locator("xpath=//input[@qa-automation='ConfirmPassword']")
     this.getBtnNext = page.locator("xpath=//button[@qa-automation='btn-next']")
-    this.getuserDropdownMenu = page.locator("xpath=//button[@qa-automation='userDropdownMenu']");
   }
 
   async goto() {
