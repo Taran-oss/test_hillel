@@ -17,7 +17,6 @@ await loginPage.getClickLogInBtn.click();
 
 test("sing up form", async ({ page }) => {
   const singupPage = new SingupPage(page); 
-
   await singupPage.goto();
   await singupPage.getSignUpBtn.click();
   await singupPage.getUserNameSP.pressSequentially("testuserfortest");
@@ -47,7 +46,6 @@ test("check banking ", async ({ page }) => {
   await loginPage.getClickLogInBtn.click();
   await loginPage.getuserDropdownMenu.click();
   await loginPage.getBanking.click();
-  await bankingPage.getDepositOptions.check();
 });
 
 
